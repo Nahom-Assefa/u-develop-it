@@ -25,7 +25,11 @@ const db = mysql.createConnection(
 
 // Select all cryptocurrency
 app.get("/api/crypto", (req, res) => {
-  const sql = `SELECT * FROM candidates`;
+  const sql = `SELECT candidates.*, parties.name
+               AS party_name
+               FROM candidates 
+               LEFT join parties 
+               ON candidates.party_id = parties.id`;
 
   db.query(sql, (err, rows) => {
     if (err) {
@@ -41,8 +45,14 @@ app.get("/api/crypto", (req, res) => {
 });
 
 // Isolate one cryptocurrency
-app.get('/api/crypto/:id', (req, res) => {
-  const sql = `SELECT * FROM candidates WHERE id = ?`;
+app.get("/api/crypto/:id", (req, res) => {
+  const sql = `SELECT candidates.*, parties.name
+               AS party_name
+               FROM candidates
+               LEFT join parties
+               ON candidates.party_id = parties.id
+               WHERE candidates.id = ?
+               `;
   const params = [req.params.id];
 
   db.query(sql, params, (err, row) => {
@@ -58,30 +68,30 @@ app.get('/api/crypto/:id', (req, res) => {
 });
 
 // delete a cryptocurrency
-app.delete('/api/crypto/:id', (req, res) => {
-    const sql = `DELETE FROM candidates WHERE id = ?`;
-    const params = [req.params.id];
+app.delete("/api/crypto/:id", (req, res) => {
+  const sql = `DELETE FROM candidates WHERE id = ?`;
+  const params = [req.params.id];
 
-    db.query(sql, params, (err, result) => {
-      if (err) {
-        res.statusMessage(400).json({ error: res.message });
-      } else if (!result.affectedRows) {
-        res.json({
-          message: 'Candidate not found'
-        });
-      } else {
-        res.json({
-          message: 'deleted',
-          changes: result.affectedRows,
-          id: req.params.id
-        });
-      }
-    });
+  db.query(sql, params, (err, result) => {
+    if (err) {
+      res.statusMessage(400).json({ error: res.message });
+    } else if (!result.affectedRows) {
+      res.json({
+        message: "Candidate not found",
+      });
+    } else {
+      res.json({
+        message: "deleted",
+        changes: result.affectedRows,
+        id: req.params.id,
+      });
+    }
   });
+});
 
 // create a cryptocurrency
 app.post("/api/crypto", ({ body }, res) => {
-  console.log('line 84', body);
+  console.log("line 84", body);
   const errors = inputCheck(
     body,
     "first_name",
@@ -107,7 +117,6 @@ app.post("/api/crypto", ({ body }, res) => {
     });
   });
 });
-
 
 app.use((req, res) => {
   res.status(404).end();
