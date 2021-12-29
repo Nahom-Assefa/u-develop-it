@@ -3,6 +3,7 @@
 
 module.exports = function(obj, ...props) {
   const errors = [];
+  console.log("line 6", obj, props);
 
   props.forEach((prop) => {
     // if property is blank or doesn't exist, add to errors array
