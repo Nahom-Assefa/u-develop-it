@@ -34,7 +34,7 @@ router.get("/voters/:id", (req, res) => {
 router.post("/voters", ({ body }, res) => {
   const errors = inputCheck(body, "first_name", "last_name", "email");
   if (errors) {
-    res.status(400).json({ error: errors.message });
+    res.status(400).json({ error: errors });
     return;
   }
   // const id = [req.params.id];
@@ -56,7 +56,7 @@ router.post("/voters", ({ body }, res) => {
 router.put("/voters/:id", (req, res) => {
   const errors = inputCheck(req.body, "email");
   if (errors) {
-    res.status(400), json({ error: errors.message });
+    res.status(400), json({ error: errors});
     return;
   }
 

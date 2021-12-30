@@ -80,19 +80,18 @@ VALUES
   ('Gerald', 'Griffin', 'ggriff@lit.net');
 
   
-
--- INSERT INTO candidates (first_name, last_name, industry_connected)
--- VALUES
---   ('Ronald', 'Firbank', 1),
---   ('Virginia', 'Woolf', 1),
---   ('Piers', 'Gaveston', 0),
---   ('Charles', 'LeRoi', 1),
---   ('Katherine', 'Mansfield', 1),
---   ('Dora', 'Carrington', 0),
---   ('Edward', 'Bellamy', 0),
---   ('Montague', 'Summers', 1),
---   ('Octavia', 'Butler', 1),
---   ('Unica', 'Zurn', 1);
+INSERT INTO votes (voter_id, candidate_id) VALUES(1, 1);
+INSERT INTO votes (voter_id, candidate_id) VALUES(2, 1);
+INSERT INTO votes (voter_id, candidate_id) VALUES(3, 7);
+INSERT INTO votes (voter_id, candidate_id) VALUES(4, 3);
+INSERT INTO votes (voter_id, candidate_id) VALUES(5, 6);
+INSERT INTO votes (voter_id, candidate_id) VALUES(6, 6);
+INSERT INTO votes (voter_id, candidate_id) VALUES(7, 8);
+INSERT INTO votes (voter_id, candidate_id) VALUES(8, 3);
+INSERT INTO votes (voter_id, candidate_id) VALUES(9, 3);
+INSERT INTO votes (voter_id, candidate_id) VALUES(10, 7);
+INSERT INTO votes (voter_id, candidate_id) VALUES(11, 10);
+INSERT INTO votes (voter_id, candidate_id) VALUES(12, 4);
 
 
 
